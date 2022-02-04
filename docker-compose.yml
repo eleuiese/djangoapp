@@ -1,0 +1,20 @@
+version: '3'
+
+services: 
+  db:
+    image: postgres
+
+    environment:
+      - POSTGRES_DB=jobtestdb
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=jobtest1234
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:9000
+    volumes:
+      - .:/testjob
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
